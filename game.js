@@ -8,9 +8,9 @@ const COLOUR = {
 const ABC = 'abcdefghijklmnopqrstuvwxz';
 
 class Game {
-  constructor(code) {
+  constructor(code, fen) {
     this.code = code || this.genCode(5);
-    this.game = new Chess();
+    this.game = new Chess(fen || undefined);
     this.toConnect = COLOUR.WHITE;
     this.connected = [];
     this.taken = [];
@@ -49,6 +49,20 @@ class Game {
 
   move(fen) {
     this.game = new Chess(fen);
+  }
+
+  take(piece) {
+    this.taken.push(piece);
+
+    // Sort the taken array
+    const order = ['♙', '♗', '♘', '♖', '♕', '♟', '♝', '♞', '♜', '♛'];
+    let newTaken = Array.from({ length: 20 }, () => undefined);
+    for (let p of this.taken) {
+      const idx = order.indexOf(p);
+      newTaken.splice(idx, 0, p);
+    }
+    newTaken = newTaken.filter((v) => v !== undefined);
+    this.taken = newTaken;
   }
 }
 
