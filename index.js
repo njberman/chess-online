@@ -21,17 +21,17 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-const client = new MongoClient(URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverApi: ServerApiVersion.v1,
-});
+// const client = new MongoClient(URI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   serverApi: ServerApiVersion.v1,
+// });
 
 // client
 //   .connect()
 //   .then(async () => {
-const db = client.db('games');
-const collection = db.collection('games');
+// const db = client.db('games');
+// const collection = db.collection('games');
 // const games = async () => await collection.find({}).toArray();
 app.post('/new-game', (req, res) => {
   if (req.body && req.body.code) {
