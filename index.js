@@ -24,37 +24,38 @@ app.use(express.json());
 let Stockfish;
 let myEngine;
 
-try {
-  const INIT_ENGINE = require('./stockfish.js');
+// try {
+//   const INIT_ENGINE = require('./stockfish.js');
 
-  var wasmPath = require('path').join(__dirname, 'stockfish.wasm');
-  var mod = {
-    locateFile: function (path) {
-      if (path.indexOf('.wasm') > -1) {
-        return wasmPath;
-      } else {
-        return __filename;
-      }
-    },
-  };
-  if (typeof INIT_ENGINE === 'function') {
-    Stockfish = INIT_ENGINE();
-    try {
-      Stockfish(mod).then(function (sf) {
-        myEngine = sf;
-        start();
-      });
-    } catch (e) {
-      console.error(e);
-      console.error(
-        '\nYour Node.js version appears to be too old. Also, try adding --experimental-wasm-threads --experimental-wasm-simd.\n',
-      );
-      process.exit(1);
-    }
-  }
-} catch (e) {
-  console.error(e);
-}
+//   var wasmPath = require('path').join(__dirname, 'stockfish.wasm');
+//   var mod = {
+//     locateFile: function (path) {
+//       if (path.indexOf('.wasm') > -1) {
+//         return wasmPath;
+//       } else {
+//         return __filename;
+//       }
+//     },
+//   };
+//   if (typeof INIT_ENGINE === 'function') {
+//     Stockfish = INIT_ENGINE();
+//     try {
+//       Stockfish(mod).then(function (sf) {
+//         myEngine = sf;
+//         start();
+//       });
+//     } catch (e) {
+//       console.error(e);
+//       console.error(
+//         '\nYour Node.js version appears to be too old. Also, try adding --experimental-wasm-threads --experimental-wasm-simd.\n',
+//       );
+//       process.exit(1);
+//     }
+//   }
+// } catch (e) {
+//   console.error(e);
+// }
+start();
 
 function start() {
   const send = (str) => {
